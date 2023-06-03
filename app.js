@@ -4,20 +4,7 @@ const app = express()
 //
 // serviceWorker.unregister();
 app.get('/', function (req, res) {
-  let today = new Date()
-  let time = today.getTime()
-  let ar = ['message1', 'message2']
   let msg = 'message 0'
-  console.log(msg)
-  msg = function () {
-    if (time%2===0) {
-      console.log(ar[1])
-      return(ar[1])
-    }else{
-      console.log(ar[0])
-      return(ar[0])
-    }
-  }
   console.log(msg)
   res.json({body : msg})
 })
