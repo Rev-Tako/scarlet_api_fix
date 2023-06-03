@@ -4,8 +4,8 @@ const app = express()
 //
 // serviceWorker.unregister();
 app.get('/', function (req, res) {
-
-  res.json({body : 'new message 2'})
+  const msg = 'big message'
+  res.json({body : msg})
 })
 
 app.listen(3000, function () {
