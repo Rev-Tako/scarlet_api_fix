@@ -4,8 +4,7 @@ import * as serviceWorker from './serviceWorker';
 
 serviceWorker.unregister();
 app.get('/', function (req, res) {
-  res.send("<header> {name: 'scarlet', message: {msg}}</header>"
-  )
+  res.send('message')
 })
 
 app.listen(3000, function () {
