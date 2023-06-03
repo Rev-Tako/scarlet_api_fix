@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 
 app.get('/', function (req, res) {
-  this.setState({user_input: '', SCARLET_output: '', msg: 'message 0'})
+  const into = {user_input: '', SCARLET_output: '', msg: 'message 0'}
   let today = new Date()
   let time = today.getSeconds()
   let ar = ['message1', 'message2']
@@ -13,8 +13,8 @@ app.get('/', function (req, res) {
       return(ar[0])
     }
   };
-  this.setState({msg: fun(time, ar)});
-  res.json(this.state)
+  const outof = { ...into, msg: fun(time, ar) }
+  res.json(outof)
 })
 
 
