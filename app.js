@@ -5,7 +5,7 @@ const app = express()
 // serviceWorker.unregister();
 app.get('/', function (req, res) {
   let today = new Date()
-  let time = today.getTime()
+  let time = today.getSeconds()
   let ar = ['message1', 'message2']
   let msg = 'message 0'
   console.log(msg)
