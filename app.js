@@ -1,9 +1,12 @@
 const express = require('express')
 const app = express()
+import * as serviceWorker from './serviceWorker';
 
+serviceWorker.unregister();
 app.get('/', function (req, res) {
-  let msg = 'look, a message'
-  res.send('<header>{msg}</header>')
+  export const msg = 'look, a message'
+  res.send(msg
+  )
 })
 
 app.listen(3000, function () {
