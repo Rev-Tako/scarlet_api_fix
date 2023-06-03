@@ -5,7 +5,7 @@ import * as serviceWorker from './serviceWorker';
 serviceWorker.unregister();
 app.get('/', function (req, res) {
   const msg = 'look, a message'
-  res.json({
+  res.send({
     name: 'scarlet',
     message: msg
   }
