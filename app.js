@@ -2,8 +2,8 @@ const express = require('express')
 const app = express()
 
 app.get('/', function (req, res) {
-  //functions go here
-  res.send('new message')
+  let msg = 'look, a message'
+  res.send(<header>{msg}</header>)
 })
 
 app.listen(3000, function () {
