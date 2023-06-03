@@ -1,8 +1,8 @@
 const express = require('express')
 const app = express()
-import * as serviceWorker from './serviceWorker';
-
-serviceWorker.unregister();
+// import * as serviceWorker from './serviceWorker';
+//
+// serviceWorker.unregister();
 app.get('/', function (req, res) {
   res.send('message')
 })
