@@ -4,8 +4,9 @@ const app = express()
 app.get(
     '/',
     function (req, res) {
+
         try {
-            fetch('./fetcher', {
+            fetch('fetcher.js', {
                 method: 'GET',
             })
                 .then(response => response.json())
