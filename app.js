@@ -4,8 +4,16 @@ const app = express()
 app.get(
     '/',
     function (req, res) {
-  const outof = <div><div>API: Online</div><div>SCARLET : </div></div>
-  res.json(outof)
+        try {
+            fetch('./fetcher', {
+                method: 'GET',
+            })
+                .then(response => response.json())
+                .then(json =>
+                    res.json({API: 'ONLINE', SCARLET: 'OFFLINE'}))
+        } catch {
+        res.json({API: 'ONLINE', SCARLET: 'OFFLINE'})
+        }
 })
 
 app.post(

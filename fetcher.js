@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function fetcher(request) {
+export async function handler(request) {
     let rasa_format = {
         "sender": "user",  // sender ID of the user sending the message
         "message": request
