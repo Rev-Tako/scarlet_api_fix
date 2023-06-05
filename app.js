@@ -4,7 +4,7 @@ const app = express()
 app.get(
     '/',
     function (req, res) {
-  const outof = {msg: 'API: Online' }
+  const outof = 'API: Online'
   res.json(outof)
 })
 
