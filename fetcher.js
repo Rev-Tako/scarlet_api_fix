@@ -45,7 +45,6 @@ module.exports = {
                 }
             }
         } catch (err) {
-            console.log(err) // output to netlify function log
             return {
                 statusCode: 200,
                 body: {
