@@ -13,13 +13,14 @@ export async function fetcher(request) {
         });
         return {
             statusCode:200,
-            body: response.text
+            body: {scarlet: response.text}
         }
     } catch (err) {
             console.log(err) // output to netlify function log
             return {
-                statusCode: 500,
+                statusCode: 200,
                 body: '',
+                ermsg: 'Something went wrong connecting to SCARLET'
             }
     }
 }

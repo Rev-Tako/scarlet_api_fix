@@ -17,12 +17,21 @@ app.post(
       })
     .then(response => response.json())
     .then(json => {
+        if (json.body.scarlet && !(json.body.scarlet.length===0)) {
         const out = {
             user_input: req.body,
-            SCARLET_output: json.body,
+            SCARLET_output: json.body.scarlet,
             msg: ''
         }
         res.json(out)
+        }else{
+         const out = {
+             user_input: req.body,
+             msg: '',
+             ermsg: json.body.ermsg
+         }
+         res.json(out)
+        }
     })
 })
 
