@@ -21,7 +21,7 @@ app.post(
     '/',
     function (req,res){
       try {
-          fetch('./fetcher', {
+          fetch('/fetcher.js', {
               method: 'POST',
               body: JSON.stringify(req.body)
           })
