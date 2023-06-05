@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+import axios from "axios"
 
 app.get(
     '/',
@@ -11,9 +12,17 @@ app.get(
 app.post(
     '/',
     function (req,res){
-      const send_to_scarlet = function (request) {
-        // send to SCARLET
-        return('SCARLET not connected')
+      const send_to_scarlet = async function (request) {
+          let rasa_format = {
+              "sender": "user",  // sender ID of the user sending the message
+              "message": request
+          }
+          const response = await axios({
+              method: 'POST',
+              url: "http://<pqb20197@tehr10>:<5002>/webhooks/rest/webhook",
+              body: rasa_format,
+          });
+        return(response)
       }
       const out = {
         user_input: req.body,
@@ -27,3 +36,6 @@ app.post(
 app.listen(3000, function () {
   console.log('Example app listening on port 3000')
 })
+
+
+// http://<pqb20197@tehr10>:<5002>/webhooks/rest/webhook
