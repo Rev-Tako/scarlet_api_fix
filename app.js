@@ -10,14 +10,15 @@ app.get(
             res.json({
                 API: 'ONLINE',
                 SCARLET: fetched.body.scarlet,
-                USER: 'This domain only accepts posts form netlify front end'
+                USER: 'This domain only accepts posts form netlify front end',
+                ERRORS: fetched.body.ermsg,
             })
         } catch (err){
         res.json({
             API: 'ONLINE',
             SCARLET: 'CHECK FAILED',
-            ERROR: err.message,
-            USER: 'This domain only accepts posts form netlify front end'
+            USER: 'This domain only accepts posts form netlify front end',
+            ERRORS: err.message,
         })
         }
 })

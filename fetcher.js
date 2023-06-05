@@ -38,7 +38,9 @@ module.exports = {
             });
             return {
                 statusCode: 200,
-                body: {scarlet: 'ONLINE'}
+                body: {
+                    scarlet: 'ONLINE'
+                }
             }
         } catch (err) {
             console.log(err) // output to netlify function log
@@ -46,7 +48,7 @@ module.exports = {
                 statusCode: 200,
                 body: {
                     scarlet: 'OFFLINE',
-                    ermsg: 'Error: SCARLET disconnected'},
+                    ermsg: err.message},
             }
         }
     }
