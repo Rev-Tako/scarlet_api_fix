@@ -6,7 +6,7 @@ app.get(
     function (req, res) {
 
         try {
-            fetch('/fetcher.js', {
+            fetch('fetcher.js', {
                 method: 'GET',
             })
                 .then(response => response.json())
@@ -21,7 +21,7 @@ app.post(
     '/',
     function (req,res){
       try {
-          fetch('/fetcher.js', {
+          fetch('fetcher.js', {
               method: 'POST',
               body: JSON.stringify(req.body)
           })
