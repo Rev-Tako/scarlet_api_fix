@@ -1,6 +1,5 @@
 const express = require('express')
 const app = express()
-import axios from "axios"
 
 app.get(
     '/',
@@ -12,25 +11,20 @@ app.get(
 app.post(
     '/',
     function (req,res){
-      const send_to_scarlet = async function (request) {
-          let rasa_format = {
-              "sender": "user",  // sender ID of the user sending the message
-              "message": request
-          }
-          const response = await axios({
-              method: 'POST',
-              url: "http://<pqb20197@tehr10>:<5002>/webhooks/rest/webhook",
-              body: rasa_format,
-          });
-        return(response)
-      }
-      const out = {
-        user_input: req.body,
-        SCARLET_output: send_to_scarlet(req.body),
-        msg:'no output to display'}
-      res.json(out)
-    }
-)
+      fetch('./fetcher', {
+          method: 'POST',
+          body: JSON.stringify(req.body)
+      })
+    .then(response => response.json())
+    .then(json => {
+        const out = {
+            user_input: req.body,
+            SCARLET_output: json.body,
+            msg: 'no output to display'
+        }
+        res.json(out)
+    })
+})
 
 
 app.listen(3000, function () {
