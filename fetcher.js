@@ -16,7 +16,7 @@ module.exports = {
                 statusCode: 200,
                 body: {
                     scarlet: response.text,
-                    ermsg: 'no error'
+                    ermsg: 'Success'
                 }
             }
         } catch (err) {
@@ -41,7 +41,7 @@ module.exports = {
                     statusCode: 200,
                     body: {
                         scarlet: 'ONLINE',
-                        ermsg: 'no error'
+                        ermsg: 'http request succeeded'
                     }
                 }
             } else {

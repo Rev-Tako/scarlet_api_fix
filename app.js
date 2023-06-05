@@ -33,7 +33,7 @@ app.post(
                   user_input: req.body,
                   SCARLET_output: fetched.body.scarlet,
                   msg: '',
-                  ermsg: ''
+                  ermsg: fetched.ermsg
               }
               res.json(out)
           } else {
@@ -50,14 +50,13 @@ app.post(
               msg: '',
               ermsg: err.message//'Error: disconnect between API and fetcher'
           }
-          console.log(err.message)
           res.json(out)
       }
 })
 
 
 app.listen(3000, function () {
-  console.log('Example app listening on port 3000')
+  console.log('SCARLET API listening on port 3000')
 })
 
 
