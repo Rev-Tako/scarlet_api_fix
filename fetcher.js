@@ -13,12 +13,13 @@ export async function fetcher(request) {
         });
         return {
             statusCode:200,
-            body: response}
+            body: response.text
+        }
     } catch (err) {
             console.log(err) // output to netlify function log
             return {
                 statusCode: 500,
-                body: JSON.stringify({error: err.message, msg: ''}) // Could be a custom message or object i.e. JSON.stringify(err)
+                body: '',
             }
     }
 }
