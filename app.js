@@ -15,7 +15,7 @@ app.get(
         } catch {
         res.json({
             API: 'ONLINE',
-            SCARLET: 'OFFLINE',
+            SCARLET: 'CHECK FAILED',
             USER: 'This domain only accepts posts form netlify front end'
         })
         }
