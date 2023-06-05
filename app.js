@@ -4,7 +4,6 @@ const fetcher = require('./fetcher')
 app.get(
     '/',
     function (req, res) {
-
         try {
             const fetched = fetcher.get()
             res.json({
@@ -14,14 +13,15 @@ app.get(
                 ERRORS: fetched.body.ermsg,
             })
         } catch (err){
-        res.json({
-            API: 'ONLINE',
-            SCARLET: 'CHECK FAILED',
-            USER: 'This domain only accepts posts form netlify front end',
-            ERRORS: err.message,
-        })
+            res.json({
+                API: 'ONLINE',
+                SCARLET: 'CHECK FAILED',
+                USER: 'This domain only accepts posts form netlify front end',
+                ERRORS: err.message,
+            })
         }
-})
+    }
+    )
 
 app.post(
     '/',

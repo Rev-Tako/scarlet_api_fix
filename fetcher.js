@@ -32,25 +32,25 @@ module.exports = {
     },
 
     get() {
-        try {
             const response = axios({
                 method: 'GET',
                 url: "http://<pqb20197@tehr10>:<5002>/webhooks/rest/webhook",
             });
-            return {
-                statusCode: 200,
-                body: {
-                    scarlet: 'ONLINE',
-                    ermsg: 'no error'
+            if (response.success) {
+                return {
+                    statusCode: 200,
+                    body: {
+                        scarlet: 'ONLINE',
+                        ermsg: 'no error'
+                    }
+                }
+            } else {
+                return {
+                    statusCode: 200,
+                    body: {
+                        scarlet: 'OFFLINE',
+                        ermsg: 'http request failed'},
                 }
             }
-        } catch (err) {
-            return {
-                statusCode: 200,
-                body: {
-                    scarlet: 'OFFLINE',
-                    ermsg: err.message},
-            }
-        }
     }
 }
