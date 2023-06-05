@@ -7,6 +7,7 @@ app.get(
 
         try {
             const fetched = fetcher.get()
+            console.log(fetched.body)
             res.json({
                 API: 'ONLINE',
                 SCARLET: fetched.scarlet,
