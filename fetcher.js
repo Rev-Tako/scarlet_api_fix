@@ -20,7 +20,7 @@ export async function fetcher(request) {
             return {
                 statusCode: 200,
                 body: '',
-                ermsg: 'Something went wrong connecting to SCARLET'
+                ermsg: 'Error: disconnect between fetcher and SCARLET'
             }
     }
 }
