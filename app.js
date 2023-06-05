@@ -7,9 +7,17 @@ app.get(
 
         try {
             const fetched = fetcher.get()
-            res.json({API: 'ONLINE', SCARLET: fetched.body.scarlet})
+            res.json({
+                API: 'ONLINE',
+                SCARLET: fetched.body.scarlet,
+                USER: 'This domain only accepts posts form netlify front end'
+            })
         } catch {
-        res.json({API: 'ONLINE', SCARLET: 'OFFLINE'})
+        res.json({
+            API: 'ONLINE',
+            SCARLET: 'OFFLINE',
+            USER: 'This domain only accepts posts form netlify front end'
+        })
         }
 })
 
