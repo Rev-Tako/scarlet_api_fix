@@ -41,7 +41,7 @@ module.exports = {
             return {
                 statusCode: 200,
                 body: {scarlet: 'OFFLINE'},
-                ermsg: 'Error: disconnect between fetcher and SCARLET'
+                ermsg: 'Error: SCARLET disconnected'
             }
         }
     }
