@@ -32,7 +32,8 @@ app.post(
               const out = {
                   user_input: req.body,
                   SCARLET_output: fetched.body.scarlet,
-                  msg: ''
+                  msg: '',
+                  ermsg: ''
               }
               res.json(out)
           } else {

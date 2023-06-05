@@ -15,7 +15,8 @@ module.exports = {
             return {
                 statusCode: 200,
                 body: {
-                    scarlet: response.text
+                    scarlet: response.text,
+                    ermsg: 'no error'
                 }
             }
         } catch (err) {
@@ -39,7 +40,8 @@ module.exports = {
             return {
                 statusCode: 200,
                 body: {
-                    scarlet: 'ONLINE'
+                    scarlet: 'ONLINE',
+                    ermsg: 'no error'
                 }
             }
         } catch (err) {
