@@ -9,7 +9,7 @@ app.get(
             const fetched = fetcher.get()
             res.json({
                 API: 'ONLINE',
-                SCARLET: fetched.body,
+                SCARLET: fetched.body.scarlet,
                 USER: 'This domain only accepts posts form netlify front end'
             })
         } catch (err){

@@ -14,21 +14,25 @@ module.exports = {
             });
             return {
                 statusCode: 200,
-                body: {scarlet: response.text}
+                body: {
+                    scarlet: response.text
+                }
             }
         } catch (err) {
             console.log(err) // output to netlify function log
             return {
                 statusCode: 200,
-                body: {scarlet: 'Response failed'},
-                ermsg: 'Error: disconnect between fetcher and SCARLET'
+                body: {
+                    scarlet: 'Response failed',
+                    ermsg: 'Error: disconnect between fetcher and SCARLET'
+                },
             }
         }
     },
 
-    async get() {
+    get() {
         try {
-            const response = await axios({
+            const response = axios({
                 method: 'GET',
                 url: "http://<pqb20197@tehr10>:<5002>/webhooks/rest/webhook",
             });
@@ -40,8 +44,9 @@ module.exports = {
             console.log(err) // output to netlify function log
             return {
                 statusCode: 200,
-                body: {scarlet: 'OFFLINE'},
-                ermsg: 'Error: SCARLET disconnected'
+                body: {
+                    scarlet: 'OFFLINE',
+                    ermsg: 'Error: SCARLET disconnected'},
             }
         }
     }
