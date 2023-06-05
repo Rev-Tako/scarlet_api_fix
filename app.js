@@ -4,7 +4,7 @@ const app = express()
 app.get(
     '/',
     function (req, res) {
-  const outof = {msg: 'get requests to this page do nothing, use post from an api' }
+  const outof = {msg: 'API: Online' }
   res.json(outof)
 })
 
@@ -20,7 +20,7 @@ app.post(
         const out = {
             user_input: req.body,
             SCARLET_output: json.body,
-            msg: 'no output to display'
+            msg: ''
         }
         res.json(out)
     })
