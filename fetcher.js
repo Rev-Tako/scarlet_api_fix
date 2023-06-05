@@ -9,7 +9,7 @@ module.exports = {
         try {
             const response = await axios({
                 method: 'POST',
-                url: "http://<pqb20197@tehr10>:<5002>/webhooks/rest/webhook",
+                url: "http://pqb20197@tehr10:5002/webhooks/rest/webhook",
                 body: rasa_format,
             });
             return {
@@ -34,7 +34,7 @@ module.exports = {
     get() {
             const response = axios({
                 method: 'GET',
-                url: "http://<pqb20197@tehr10>:<5002>/webhooks/rest/webhook",
+                url: "http://pqb20197@tehr10:5002/webhooks/rest/webhook",
             });
             if (response.success) {
                 return {
