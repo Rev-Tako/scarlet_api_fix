@@ -1,17 +1,13 @@
 const express = require('express')
 const app = express()
-
+const fetcher = require('./fetcher')
 app.get(
     '/',
     function (req, res) {
 
         try {
-            fetch('/fetcher', {
-                method: 'GET',
-            })
-                .then(response => response.json())
-                .then(json =>
-                    res.json({API: 'ONLINE', SCARLET: 'ONLINE'}))
+            const fetched = fetcher.get()
+            res.json({API: 'ONLINE', SCARLET: fetched.body.scarlet})
         } catch {
         res.json({API: 'ONLINE', SCARLET: 'OFFLINE'})
         }
@@ -21,28 +17,22 @@ app.post(
     '/',
     function (req,res){
       try {
-          fetch('/fetcher', {
-              method: 'POST',
-              body: JSON.stringify(req.body)
-          })
-              .then(response => response.json())
-              .then(json => {
-                  if (json.body.scarlet && !(json.body.scarlet.length === 0)) {
-                      const out = {
-                          user_input: req.body,
-                          SCARLET_output: json.body.scarlet,
-                          msg: ''
-                      }
-                      res.json(out)
-                  } else {
-                      const out = {
-                          user_input: req.body,
-                          msg: '',
-                          ermsg: json.body.ermsg
-                      }
-                      res.json(out)
-                  }
-              })
+          const fetched = fetcher.get(req.body)
+          if (fetched.body.scarlet && !(fetched.body.scarlet.length === 0)) {
+              const out = {
+                  user_input: req.body,
+                  SCARLET_output: fetched.body.scarlet,
+                  msg: ''
+              }
+              res.json(out)
+          } else {
+              const out = {
+                  user_input: req.body,
+                  msg: '',
+                  ermsg: fetched.body.ermsg
+              }
+              res.json(out)
+          }
       } catch {
           const out = {
               user_input: req.body,
