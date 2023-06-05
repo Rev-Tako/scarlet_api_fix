@@ -33,12 +33,13 @@ app.post(
               }
               res.json(out)
           }
-      } catch {
+      } catch (err){
           const out = {
               user_input: req.body,
               msg: '',
-              ermsg: 'Error: disconnect between API and fetcher'
+              ermsg: err.message//'Error: disconnect between API and fetcher'
           }
+          console.log(err.message)
           res.json(out)
       }
 })
