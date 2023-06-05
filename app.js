@@ -11,7 +11,7 @@ app.get(
             })
                 .then(response => response.json())
                 .then(json =>
-                    res.json({API: 'ONLINE', SCARLET: 'OFFLINE'}))
+                    res.json({API: 'ONLINE', SCARLET: 'ONLINE'}))
         } catch {
         res.json({API: 'ONLINE', SCARLET: 'OFFLINE'})
         }
