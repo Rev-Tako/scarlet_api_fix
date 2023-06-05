@@ -20,7 +20,7 @@ module.exports = {
             console.log(err) // output to netlify function log
             return {
                 statusCode: 200,
-                body: '',
+                body: {scarlet: 'Response failed'},
                 ermsg: 'Error: disconnect between fetcher and SCARLET'
             }
         }

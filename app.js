@@ -9,7 +9,7 @@ app.get(
             const fetched = fetcher.get()
             res.json({
                 API: 'ONLINE',
-                SCARLET: fetched.body.scarlet,
+                SCARLET: fetched.scarlet,
                 USER: 'This domain only accepts posts form netlify front end'
             })
         } catch (err){
@@ -27,7 +27,7 @@ app.post(
     function (req,res){
       try {
           const fetched = fetcher.get(req.body)
-          if (fetched.body.scarlet && !(fetched.body.scarlet.length === 0)) {
+          if (fetched.scarlet && !(fetched.scarlet.length === 0)) {
               const out = {
                   user_input: req.body,
                   SCARLET_output: fetched.body.scarlet,
@@ -38,7 +38,7 @@ app.post(
               const out = {
                   user_input: req.body,
                   msg: '',
-                  ermsg: fetched.body.ermsg
+                  ermsg: fetched.ermsg
               }
               res.json(out)
           }
