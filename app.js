@@ -6,7 +6,7 @@ app.get(
     function (req, res) {
 
         try {
-            fetch('fetcher.js', {
+            fetch('/fetcher.js', {
                 method: 'GET',
             })
                 .then(response => response.json())
