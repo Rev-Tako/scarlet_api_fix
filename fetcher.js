@@ -54,6 +54,9 @@ module.exports = {
                 }
             } else {
                 console.log('connection failure')
+                console.log(response.error.code)
+                console.log(response.error.name)
+                console.log(response.error.message)
                 if (response.error.message.length > 0) {
                     console.log(response.error.code)
                     console.log(response.error.name)
