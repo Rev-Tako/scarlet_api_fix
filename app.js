@@ -5,9 +5,10 @@ const React = require('react')
 const axios = require("axios")
 app.get(
     '/',
-    function (req, res) {
+    async function (req, res) {
         try {
             const fetched = Doget()
+            let returned = await fetched;
             console.log(fetched)
             res.json({
                 API: 'ONLINE',
@@ -68,7 +69,7 @@ async function Doget() {
     try {
         let response = await axios.get(URL);
         let to_return = await response.data;
-        console.log(to_return);
+        //console.log(to_return);
         return {
             statusCode: 200,
             body: {
