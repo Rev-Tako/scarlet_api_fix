@@ -36,6 +36,11 @@ module.exports = {
                 method: 'GET',
                 url: "http://tehr10.cis.strath.ac.uk:5055/",
             });
+            while (response.readyState === 'pending') {
+                if (response.readyState === 'done'){
+                    break
+                }
+            }
             if (response.success) {
                 return {
                     statusCode: 200,
@@ -45,11 +50,21 @@ module.exports = {
                     }
                 }
             } else {
+
+                if (response.error.message.length > 0) {
+                    return{
+                        statusCode: 200,
+                        body: {
+                            scarlet: 'OFFLINE',
+                            ermsg: response.error.message},
+                    }
+                }else{
                 return {
                     statusCode: 200,
                     body: {
                         scarlet: 'OFFLINE',
-                        ermsg: 'http request failed'},
+                        ermsg: 'http request failed for unknown reason'},
+                }
                 }
             }
     }

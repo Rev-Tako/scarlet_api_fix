@@ -16,7 +16,7 @@ app.get(
             res.json({
                 API: 'ONLINE',
                 SCARLET: 'CHECK FAILED',
-                USER: 'This domain only accepts posts form netlify front end',
+                USER: 'This domain only accepts posts from netlify front end',
                 ERRORS: err.message,
             })
         }
