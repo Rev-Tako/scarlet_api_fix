@@ -32,7 +32,7 @@ module.exports = {
         }
     },
 
-    async get() {
+    get() {
         React.useEffect(() => {
             axios
                 .get("http://tehr10.cis.strath.ac.uk:5055/")
@@ -47,7 +47,7 @@ module.exports = {
                             }
                         }
                     } else {
-                        console.log('connection failure')
+                        console.log('connection failure on SCARLET backend')
                         return {
                             statusCode: response.status,
                             body: {
@@ -59,6 +59,7 @@ module.exports = {
                     }
                 })
                 .catch(err => {
+                    console.log('connection failed via catch in get request')
                     console.log(err.message)
                     return {
                         statusCode: 200,
