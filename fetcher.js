@@ -32,29 +32,7 @@ module.exports = {
         }
     },
 
-    Doget() {
-        const [output, setOutput] = React.useState([])
-        React.useEffect(() => {
-            fetch("http://tehr10.cis.strath.ac.uk:5055/")
-                .then((data) => {
-                    return data.json();
-                })
-                .then((data) => {
-                    setOutput(data);
-                })
-                .catch(err => {
-                    console.log(err.message)
-                });
 
-        }, []);
-        return {
-            statusCode: output,
-            body: {
-                scarlet: 'OFFLINE',
-                ermsg: 'http request failed'
-            }
-        }
-    },
 }
 
             //

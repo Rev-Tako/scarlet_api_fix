@@ -5,7 +5,7 @@ app.get(
     '/',
     function (req, res) {
         try {
-            const fetched = fetcher.Doget()
+            const fetched = Doget()
             res.json({
                 API: 'ONLINE',
                 SCARLET: fetched.body.scarlet,
@@ -27,7 +27,7 @@ app.post(
     '/',
     function (req,res){
       try {
-          const fetched = fetcher.Doget(req.body)
+          const fetched = Doget(req.body)
           if (fetched.scarlet && !(fetched.scarlet.length === 0)) {
               const out = {
                   user_input: req.body,
@@ -58,6 +58,31 @@ app.post(
 app.listen(3000, function () {
   console.log('SCARLET API listening on port 3000')
 })
+
+
+const Doget = () => {
+    const [output, setOutput] = React.useState([])
+    React.useEffect(() => {
+        fetch("http://tehr10.cis.strath.ac.uk:5055/")
+            .then((data) => {
+                return data.json();
+            })
+            .then((data) => {
+                setOutput(data);
+            })
+            .catch(err => {
+                console.log(err.message)
+            });
+
+    }, []);
+    return {
+        statusCode: output,
+        body: {
+            scarlet: 'OFFLINE',
+            ermsg: 'http request failed'
+        }
+    }
+}
 
 
 // http://<pqb20197@tehr10>:<5002>/webhooks/rest/webhook
