@@ -8,6 +8,7 @@ app.get(
     function (req, res) {
         try {
             const fetched = Doget()
+            console.log(fetched)
             res.json({
                 API: 'ONLINE',
                 SCARLET: fetched.scarlet,
@@ -68,6 +69,7 @@ async function Doget() {
         let response = await axios.get(URL);
         let to_return = await response.data;
         console.log(to_return);
+        console.log(response.status)
         return {
             statusCode: response.status,
             body: {
