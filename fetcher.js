@@ -32,7 +32,7 @@ module.exports = {
         }
     },
 
-    async Doget() {
+    Doget() {
         React.useEffect(() => {
             axios
                 .get("http://tehr10.cis.strath.ac.uk:5055/")
