@@ -32,7 +32,7 @@ module.exports = {
         }
     },
 
-    get() {
+    async get() {
         React.useEffect(() => {
             axios
                 .get("http://tehr10.cis.strath.ac.uk:5055/")
@@ -51,13 +51,23 @@ module.exports = {
                         return {
                             statusCode: response.status,
                             body: {
-                                scarlet: 'ONLINE',
-                                ermsg: 'http request succeeded'
+                                scarlet: 'OFFLINE',
+                                ermsg: 'http request failed'
                             }
                         }
 
                     }
-                });
+                })
+                .catch(err => {
+                    console.log(err.message)
+                    return {
+                        statusCode: 200,
+                        body: {
+                            scarlet: 'OFFLINE',
+                            ermsg: 'http request failed'
+                        }
+                    }
+                })
         }, [])
     },
 }
