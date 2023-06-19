@@ -62,8 +62,6 @@ app.listen(3000, function () {
 
 
 const Doget = () => {
-    const [output, setOutput] = React.useState({})
-    React.useEffect(() => {
         fetch("http://tehr10.cis.strath.ac.uk:5055/")
             .then(function(response){
                 console.log(response.status);
@@ -73,21 +71,19 @@ const Doget = () => {
                 return response.json();
             })
             .then((response) => {
-                setOutput(response);
+                return {
+                    statusCode: response.status,
+                    body: {
+                        scarlet: 'OFFLINE',
+                        ermsg: 'http request failed'
+                    }
+                }
+                //setOutput(response);
             })
             .catch(err => {
                 console.log(err.message)
             });
-
-    }, []);
-    return {
-        statusCode: output.status,
-        body: {
-            scarlet: 'OFFLINE',
-            ermsg: 'http request failed'
-        }
-    }
 }
 
 
-// http://<pqb20197@tehr10>:<5002>/webhooks/rest/webhook
+// http://<pqb20197@tehr10>:<5002>/webhooks/rest/webhook       const [output, setOutput] = React.useState({})     React.useEffect(() => {  }, []);
