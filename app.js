@@ -62,7 +62,7 @@ app.listen(3000, function () {
 
 
 const Doget = () => {
-    const [output, setOutput] = React.useState([])
+    const [output, setOutput] = React.useState({})
     React.useEffect(() => {
         fetch("http://tehr10.cis.strath.ac.uk:5055/")
             .then((data) => {
