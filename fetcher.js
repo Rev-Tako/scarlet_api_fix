@@ -9,7 +9,7 @@ module.exports = {
         try {
             const response = axios({
                 method: 'POST',
-                url: 'http://tehr10.cis.strath.ac.uk:5055/webhooks/rest/webhook', //"http://localhost:5002/webhooks/rest/webhook",
+                url: 'http://tehr10.cis.strath.ac.uk:5055/', //webhooks/rest/webhook', //"http://localhost:5002/webhooks/rest/webhook",
                 body: rasa_format,
             });
             return {
@@ -34,7 +34,7 @@ module.exports = {
     get() {
             const response = axios({
                 method: 'GET',
-                url: "http://tehr10.cis.strath.ac.uk:5055/webhooks/rest/webhook",
+                url: "http://tehr10.cis.strath.ac.uk:5055/",
             });
             if (response.success) {
                 return {
