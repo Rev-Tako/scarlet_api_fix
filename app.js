@@ -61,8 +61,24 @@ app.listen(3000, function () {
 })
 
 
-const Doget = () => {
-        fetch("http://tehr10.cis.strath.ac.uk:5055/")
+async function Doget() {
+    let URL = "http://tehr10.cis.strath.ac.uk:5055/"
+    try {
+        let response = await axios.get(URL);
+        let to_return = await response.data;
+        console.log(to_return);
+    } catch (err) {
+        console.log("err.message")
+
+    }
+}
+
+/*
+
+
+
+
+fetch("http://tehr10.cis.strath.ac.uk:5055/")
             .then(function(response){
                 console.log(response.status);
                 if (!response.ok) {
@@ -90,7 +106,9 @@ const Doget = () => {
                     }
                 }
             });
-}
+
+
+*/
 
 
 // http://<pqb20197@tehr10>:<5002>/webhooks/rest/webhook       const [output, setOutput] = React.useState({})     React.useEffect(() => {  }, []);
