@@ -65,11 +65,15 @@ const Doget = () => {
     const [output, setOutput] = React.useState({})
     React.useEffect(() => {
         fetch("http://tehr10.cis.strath.ac.uk:5055/")
-            .then((data) => {
-                return data.json();
+            .then(function(response){
+                console.log(response.status);
+                if (!response.ok) {
+                    throw new Error("HTTP status " + response.status);
+                }
+                return response.json();
             })
-            .then((data) => {
-                setOutput(data);
+            .then((response) => {
+                setOutput(response);
             })
             .catch(err => {
                 console.log(err.message)
@@ -77,7 +81,7 @@ const Doget = () => {
 
     }, []);
     return {
-        statusCode: output,
+        statusCode: output.status,
         body: {
             scarlet: 'OFFLINE',
             ermsg: 'http request failed'
