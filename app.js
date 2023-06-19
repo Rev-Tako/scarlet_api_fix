@@ -9,12 +9,11 @@ app.get(
         try {
             const fetched = Doget()
             let returned = await fetched;
-            console.log(returned)
             res.json({
                 API: 'ONLINE',
-                SCARLET: returned.scarlet,
+                SCARLET: returned.body.scarlet,
                 USER: 'This domain only accepts posts from netlify front end',
-                ERRORS: returned.ermsg,
+                ERRORS: returned.body.ermsg,
             })
         } catch (err){
             res.json({
