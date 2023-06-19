@@ -68,7 +68,7 @@ async function Doget() {
         let to_return = await response.data;
         console.log(to_return);
     } catch (err) {
-        console.log("err.message")
+        console.log(err.message)
 
     }
 }
