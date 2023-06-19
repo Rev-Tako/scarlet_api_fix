@@ -12,9 +12,9 @@ app.get(
             console.log(fetched)
             res.json({
                 API: 'ONLINE',
-                SCARLET: fetched.scarlet,
+                SCARLET: returned.scarlet,
                 USER: 'This domain only accepts posts from netlify front end',
-                ERRORS: fetched.ermsg,
+                ERRORS: returned.ermsg,
             })
         } catch (err){
             res.json({
