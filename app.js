@@ -69,11 +69,10 @@ async function Doget() {
         let response = await axios.get(URL);
         let to_return = await response.data;
         console.log(to_return);
-        console.log(response.status)
         return {
-            statusCode: response.status,
+            statusCode: 200,
             body: {
-                scarlet: 'ONLINE',
+                scarlet: to_return,
                 ermsg: 'http request succeeded'
             }
         }
