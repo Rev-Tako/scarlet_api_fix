@@ -2,7 +2,7 @@ const axios = require("axios")
 const React = require('react')
 
 module.exports = {
-    async handler(request) {
+    async Handler(request) {
         let rasa_format = {
             "sender": "user",  // sender ID of the user sending the message
             "message": request
@@ -32,7 +32,7 @@ module.exports = {
         }
     },
 
-    async get() {
+    async Doget() {
         React.useEffect(() => {
             axios
                 .get("http://tehr10.cis.strath.ac.uk:5055/")

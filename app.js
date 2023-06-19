@@ -5,7 +5,7 @@ app.get(
     '/',
     function (req, res) {
         try {
-            const fetched = fetcher.get()
+            const fetched = fetcher.Doget()
             res.json({
                 API: 'ONLINE',
                 SCARLET: fetched.body.scarlet,
@@ -27,7 +27,7 @@ app.post(
     '/',
     function (req,res){
       try {
-          const fetched = fetcher.get(req.body)
+          const fetched = fetcher.Doget(req.body)
           if (fetched.scarlet && !(fetched.scarlet.length === 0)) {
               const out = {
                   user_input: req.body,
