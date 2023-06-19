@@ -37,11 +37,14 @@ module.exports = {
                 url: "http://tehr10.cis.strath.ac.uk:5055/",
             });
             while (response.readyState === 'pending') {
+                console.log('pending')
                 if (response.readyState === 'done'){
+                    console.log('done')
                     break
                 }
             }
             if (response.success) {
+                console.log('connection success')
                 return {
                     statusCode: 200,
                     body: {
@@ -50,8 +53,11 @@ module.exports = {
                     }
                 }
             } else {
-
+                console.log('connection failure')
                 if (response.error.message.length > 0) {
+                    console.log(response.error.code)
+                    console.log(response.error.name)
+                    console.log(response.error.message)
                     return{
                         statusCode: 200,
                         body: {
@@ -59,6 +65,7 @@ module.exports = {
                             ermsg: response.error.message},
                     }
                 }else{
+                    console.log('(-_-)')
                 return {
                     statusCode: 200,
                     body: {
