@@ -9,7 +9,7 @@ app.get(
         try {
             const fetched = Doget()
             let returned = await fetched;
-            console.log(fetched)
+            console.log(returned)
             res.json({
                 API: 'ONLINE',
                 SCARLET: returned.scarlet,
