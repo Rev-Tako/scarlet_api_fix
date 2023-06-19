@@ -82,6 +82,13 @@ const Doget = () => {
             })
             .catch(err => {
                 console.log(err.message)
+                return {
+                    statusCode: 200,
+                    body: {
+                        scarlet: 'OFFLINE',
+                        ermsg: 'http request failed'
+                    }
+                }
             });
 }
 
