@@ -1,4 +1,5 @@
 const axios = require("axios")
+import React, { useState, useEffect } from 'react';
 
 module.exports = {
     async handler(request) {
@@ -32,50 +33,39 @@ module.exports = {
     },
 
     get() {
-            const response = axios({
-                method: 'GET',
-                url: "http://tehr10.cis.strath.ac.uk:5055/",
-            });
-            while (response.readyState === 'pending') {
-                console.log('pending')
-                if (response.readyState === 'done'){
-                    console.log('done')
-                    break
-                }
-            }
-            if (response.success) {
-                console.log('connection success')
-                return {
-                    statusCode: 200,
-                    body: {
-                        scarlet: 'ONLINE',
-                        ermsg: 'http request succeeded'
+        useEffect(() => {
+            axios
+                .get("http://tehr10.cis.strath.ac.uk:5055/")
+                .then((response) => {
+                    if (response.status === 200) {
+                        console.log('connection success')
+                        return {
+                            statusCode: response.status,
+                            body: {
+                                scarlet: 'ONLINE',
+                                ermsg: 'http request succeeded'
+                            }
+                        }
+                    } else {
+                        console.log('connection failure')
+                        return {
+                            statusCode: response.status,
+                            body: {
+                                scarlet: 'ONLINE',
+                                ermsg: 'http request succeeded'
+                            }
+                        }
+
                     }
-                }
-            } else {
-                console.log('connection failure')
-                console.log(response.error.code)
-                console.log(response.error.name)
-                console.log(response.error.message)
-                if (response.error.message.length > 0) {
-                    console.log(response.error.code)
-                    console.log(response.error.name)
-                    console.log(response.error.message)
-                    return{
-                        statusCode: 200,
-                        body: {
-                            scarlet: 'OFFLINE',
-                            ermsg: response.error.message},
-                    }
-                }else{
-                    console.log('(-_-)')
-                return {
-                    statusCode: 200,
-                    body: {
-                        scarlet: 'OFFLINE',
-                        ermsg: 'http request failed for unknown reason'},
-                }
-                }
-            }
-    }
+                });
+        }, [])
+    },
 }
+
+            //
+            // const response = axios({
+            //     method: 'GET',
+            //     url: "http://tehr10.cis.strath.ac.uk:5055/",
+            // });
+
+
