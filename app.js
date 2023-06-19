@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const fetcher = require('./fetcher')
+const React = require('react')
 app.get(
     '/',
     function (req, res) {
