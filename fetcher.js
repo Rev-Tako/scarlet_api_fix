@@ -33,43 +33,27 @@ module.exports = {
     },
 
     Doget() {
+        const [output, setOutput] = React.useState([])
         React.useEffect(() => {
-            axios
-                .get("http://tehr10.cis.strath.ac.uk:5055/")
-                .then((response) => {
-                    if (response.status === 200) {
-                        console.log('connection success')
-                        return {
-                            statusCode: response.status,
-                            body: {
-                                scarlet: 'ONLINE',
-                                ermsg: 'http request succeeded'
-                            }
-                        }
-                    } else {
-                        console.log('connection failure on SCARLET backend')
-                        return {
-                            statusCode: response.status,
-                            body: {
-                                scarlet: 'OFFLINE',
-                                ermsg: 'http request failed'
-                            }
-                        }
-
-                    }
+            fetch("http://tehr10.cis.strath.ac.uk:5055/")
+                .then((data) => {
+                    return data.json();
+                })
+                .then((data) => {
+                    setOutput(data);
                 })
                 .catch(err => {
-                    console.log('connection failed via catch in get request')
                     console.log(err.message)
-                    return {
-                        statusCode: 200,
-                        body: {
-                            scarlet: 'OFFLINE',
-                            ermsg: 'http request failed'
-                        }
-                    }
-                })
-        }, [])
+                });
+
+        }, []);
+        return {
+            statusCode: output,
+            body: {
+                scarlet: 'OFFLINE',
+                ermsg: 'http request failed'
+            }
+        }
     },
 }
 
@@ -80,3 +64,40 @@ module.exports = {
             // });
 
 
+ /*   if (response.status === 200) {
+    console.log('connection success')
+    return {
+        statusCode: response.status,
+        body: {
+            scarlet: 'ONLINE',
+            ermsg: 'http request succeeded'
+        }
+    }
+} else {
+    console.log('connection failure on SCARLET backend')
+    return {
+        statusCode: response.status,
+        body: {
+            scarlet: 'OFFLINE',
+            ermsg: 'http request failed'
+        }
+    }
+
+}
+})
+.catch(err => {
+    console.log('connection failed via catch in get request')
+    console.log(err.message)
+    return {
+        statusCode: 200,
+        body: {
+            scarlet: 'OFFLINE',
+            ermsg: 'http request failed'
+        }
+    }
+})
+
+            axios
+                .get
+
+*/
