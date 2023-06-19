@@ -10,7 +10,7 @@ app.get(
             const fetched = Doget()
             res.json({
                 API: 'ONLINE',
-                SCARLET: fetched.body.scarlet,
+                SCARLET: fetched.scarlet,
                 USER: 'This domain only accepts posts from netlify front end',
                 ERRORS: fetched.body.ermsg,
             })
