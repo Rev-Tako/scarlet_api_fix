@@ -36,32 +36,18 @@ app.post(
       try {
           const fetched = fetcher.Handler(req.body)
           let returned = await fetched
-          if (returned.scarlet && !(returned.scarlet.length === 0)) {
-              const out = {
-                  body: {
-                    user_input: req.body,
-                    SCARLET_output: returned.body.scarlet,
-                    msg: '',
-                    ermsg: fetched.ermsg
-                  }
-              }
-              res.json(out)
-          } else {
-              const out = {
-                  user_input: req.body,
-                  SCARLET_output: 'error, SCARLET disconnected from API',
-                  msg: '',
-                  ermsg: fetched.ermsg
-              }
-              res.json(out)
-          }
+            res.json({
+                user_input: req.body,
+                SCARLET_output: returned.body.scarlet,
+                msg: '',
+                ermsg: fetched.ermsg
+            })
       } catch (err){
-          const out = {
+          res.json({
               user_input: req.body,
               msg: '',
               ermsg: err.message//'Error: disconnect between API and fetcher'
-          }
-          res.json(out)
+          })
       }
 })
 
