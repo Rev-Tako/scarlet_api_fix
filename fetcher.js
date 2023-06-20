@@ -3,9 +3,9 @@ const React = require('react')
 
 module.exports = {
     async Doget() {
-        let URL = "http://tehr10.cis.strath.ac.uk:5055/"
+        let scarletURL = "http://tehr10.cis.strath.ac.uk:5055/"
         try {
-            let response = await axios.get(URL);
+            let response = await axios.get(scarletURL);
             let to_return = await response.data;
             //console.log(to_return);
             return {
@@ -28,13 +28,13 @@ module.exports = {
     },
 
     async Handler(request) {
-        let URL = "http://tehr10.cis.strath.ac.uk:5055/"
+        let scarletURL = "http://tehr10.cis.strath.ac.uk:5055/"
         let rasa_format = {
             "sender": "user",  // sender ID of the user sending the message
             "message": request
         }
         try {
-            let response = await axios.post(URL, rasa_format);
+            let response = await axios.post(scarletURL, rasa_format);
             let to_return = await response.data;
             return {
                 statusCode: 200,
