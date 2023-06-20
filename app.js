@@ -6,7 +6,7 @@ const axios = require("axios")
 const cors = require('cors')
 
 app.use(cors({
-    "origin": "'https://scarletwebdevtest.netlify.app'",
+    "origin": 'https://scarletwebdevtest.netlify.app',
     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
     "preflightContinue": false,
     "optionsSuccessStatus": 204
@@ -25,6 +25,7 @@ app.get(
             })
         } catch (err){
             res.json({
+                //'Access-Control-Allow-Origin': '',
                 API: 'ONLINE',
                 SCARLET: 'CHECK FAILED',
                 USER: 'This domain only accepts posts from netlify front end',
