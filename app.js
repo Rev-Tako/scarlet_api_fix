@@ -5,7 +5,9 @@ const React = require('react')
 const axios = require("axios")
 const cors = require('cors')
 
-app.use(cors())
+app.use(cors({
+    origin: 'https://scarletwebdevtest.netlify.app'
+}));
 app.get(
     '/',
     async function (req, res) {
