@@ -28,13 +28,14 @@ app.get(
 
 app.post(
     '/',
-    function (req,res){
+    async function (req,res){
       try {
-          const fetched = Doget(req.body)
-          if (fetched.scarlet && !(fetched.scarlet.length === 0)) {
+          const fetched = Handler(req.body)
+          let returned = await fetched
+          if (returned.scarlet && !(returned.scarlet.length === 0)) {
               const out = {
                   user_input: req.body,
-                  SCARLET_output: fetched.body.scarlet,
+                  SCARLET_output: returned.body.scarlet,
                   msg: '',
                   ermsg: fetched.ermsg
               }
@@ -84,6 +85,34 @@ async function Doget() {
                 scarlet: 'OFFLINE',
                 ermsg: 'http request failed'
             }
+        }
+    }
+}
+
+async function Handler(request) {
+    let URL = "http://tehr10.cis.strath.ac.uk:5055/"
+    let rasa_format = {
+        "sender": "user",  // sender ID of the user sending the message
+        "message": request
+    }
+    try {
+        let response = await axios.post(URL, rasa_format);
+        let to_return = await response.data;
+        return {
+            statusCode: 200,
+            body: {
+                scarlet: to_return.text,
+                ermsg: 'Success'
+            }
+        }
+    } catch (err) {
+        console.log(err) // output to netlify function log
+        return {
+            statusCode: 200,
+            body: {
+                scarlet: 'Response failed',
+                ermsg: 'Error: disconnect between API and SCARLET'
+            },
         }
     }
 }
