@@ -6,9 +6,12 @@ const axios = require("axios")
 const cors = require('cors')
 
 app.use(cors({
-    "origin": 'https://scarletwebdevtest.netlify.app',
-    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-    "optionsSuccessStatus": 204
+    origin: 'https://scarletwebdevtest.netlify.app',
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    optionsSuccessStatus: 204,
+    'access-control-allow-credentials': true,
+    'access-control-allow-methods': 'GET, POST',
+    'access-control-allow-origin': '*',
 }));
 app.get(
     '/',
@@ -42,15 +45,20 @@ app.post(
           const fetched = fetcher.Handler(req.body)
           let returned = await fetched
             res.json({
-                'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
+                headers: {
+                    'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
+                },
+          body: {
                 user_input: req.body,
                 SCARLET_output: returned.body.scarlet,
                 msg: '',
                 ermsg: fetched.ermsg
-            })
+            }})
       } catch (err){
           res.json({
-              'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
+              headers: {
+                  'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
+              },
               user_input: req.body,
               SCARLET_output: 'no return from SCARLET',
               msg: '',
