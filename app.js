@@ -3,6 +3,12 @@ const app = express()
 const fetcher = require('./fetcher')
 const React = require('react')
 const axios = require("axios")
+
+app.options(
+    '/',
+
+)
+
 app.get(
     '/',
     async function (req, res) {
@@ -43,6 +49,7 @@ app.post(
           } else {
               const out = {
                   user_input: req.body,
+                  SCARLET_output: 'error, SCARLET disconnected from API',
                   msg: '',
                   ermsg: fetched.ermsg
               }
