@@ -33,7 +33,7 @@ module.exports = {
                 "http://tehr10.cis.strath.ac.uk:5055/",
                 {
                     sender: 'user',
-                    message: request.data.message.text,
+                    message: request.data.message,
                 },
                 );
             let to_return = await response.data;
