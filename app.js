@@ -48,12 +48,13 @@ app.post(
                 headers: {
                     'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
                 },
-          body: {
-                user_input: req.body,
-                SCARLET_output: returned.body.scarlet,
-                msg: '',
-                ermsg: fetched.ermsg
-            }})
+                body: {
+                    user_input: req.body,
+                    SCARLET_output: returned.body.scarlet,
+                    msg: '',
+                    ermsg: fetched.ermsg
+                }
+            })
       } catch (err){
           res.json({
               headers: {
