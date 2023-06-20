@@ -4,11 +4,6 @@ const fetcher = require('./fetcher')
 const React = require('react')
 const axios = require("axios")
 
-app.options(
-    '/',
-
-)
-
 app.get(
     '/',
     async function (req, res) {
@@ -33,17 +28,19 @@ app.get(
     )
 
 app.post(
-    '/',
+    '/scarlet',
     async function (req,res){
       try {
           const fetched = fetcher.Handler(req.body)
           let returned = await fetched
           if (returned.scarlet && !(returned.scarlet.length === 0)) {
               const out = {
-                  user_input: req.body,
-                  SCARLET_output: returned.body.scarlet,
-                  msg: '',
-                  ermsg: fetched.ermsg
+                  body: {
+                    user_input: req.body,
+                    SCARLET_output: returned.body.scarlet,
+                    msg: '',
+                    ermsg: fetched.ermsg
+                  }
               }
               res.json(out)
           } else {
