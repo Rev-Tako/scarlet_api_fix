@@ -18,6 +18,7 @@ app.get(
             const fetched = fetcher.Doget()
             let returned = await fetched;
             res.json({
+                'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
                 API: 'ONLINE',
                 SCARLET: returned.body.scarlet,
                 USER: 'This domain only accepts posts from netlify front end',
@@ -25,7 +26,7 @@ app.get(
             })
         } catch (err){
             res.json({
-                //'Access-Control-Allow-Origin': '',
+                'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
                 API: 'ONLINE',
                 SCARLET: 'CHECK FAILED',
                 USER: 'This domain only accepts posts from netlify front end',
@@ -42,6 +43,7 @@ app.post(
           const fetched = fetcher.Handler(req.body)
           let returned = await fetched
             res.json({
+                'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
                 user_input: req.body,
                 SCARLET_output: returned.body.scarlet,
                 msg: '',
@@ -49,6 +51,7 @@ app.post(
             })
       } catch (err){
           res.json({
+              'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
               user_input: req.body,
               SCARLET_output: 'no return from SCARLET',
               msg: '',
