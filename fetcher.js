@@ -28,13 +28,14 @@ module.exports = {
     },
 
     async Handler(request) {
-        let scarletURL = "http://tehr10.cis.strath.ac.uk:5055/"
-        let rasa_format = {
-            "sender": "user",  // sender ID of the user sending the message
-            "message": request
-        }
         try {
-            let response = await axios.post(scarletURL, rasa_format);
+            let response = await axios.post(
+                "http://tehr10.cis.strath.ac.uk:5055/",
+                {
+                    sender: 'user',
+                    message: request.data.message.text,
+                },
+                );
             let to_return = await response.data;
             return {
                 statusCode: 200,
