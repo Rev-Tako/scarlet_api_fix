@@ -1,12 +1,8 @@
 const express = require('express')
-const cors = require('cors')
 const app = express()
 const fetcher = require('./fetcher')
 const React = require('react')
 const axios = require("axios")
-
-app.use(cors())
-
 app.get(
     '/',
     async function (req, res) {
