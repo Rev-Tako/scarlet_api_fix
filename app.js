@@ -28,7 +28,7 @@ app.get(
     )
 
 app.post(
-    '/',
+    '/scarlet',
     async function (req,res){
       try {
           const fetched = fetcher.Handler(req.body)
