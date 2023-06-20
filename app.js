@@ -8,11 +8,11 @@ const cors = require('cors')
 app.use(cors({
     "origin": 'https://scarletwebdevtest.netlify.app',
     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-    "preflightContinue": false,
     "optionsSuccessStatus": 204
 }));
 app.get(
     '/',
+    cors(),
     async function (req, res) {
         try {
             const fetched = fetcher.Doget()
@@ -38,6 +38,7 @@ app.get(
 
 app.post(
     '/',
+    cors(),
     async function (req,res){
       try {
           const fetched = fetcher.Handler(req.body)
