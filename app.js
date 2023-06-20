@@ -46,6 +46,7 @@ app.post(
       } catch (err){
           res.json({
               user_input: req.body,
+              SCARLET_output: 'no return from SCARLET',
               msg: '',
               ermsg: err.message//'Error: disconnect between API and fetcher'
           })
