@@ -40,7 +40,7 @@ module.exports = {
             return {
                 statusCode: 200,
                 body: {
-                    scarlet: to_return,
+                    scarlet: to_return.data,
                     ermsg: 'Success'
                 }
             }
