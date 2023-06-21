@@ -44,15 +44,15 @@ app.post(
     cors(),
     async function (req,res){
       try {
-          const fetched = fetcher.Handler(req.body);
+          const fetched = fetcher.Handler(req.data);
           let returned = await fetched;
             res.json({
                 headers: {
                     'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
                 },
                 body: {
-                    user_input: req.body,
-                    SCARLET_output: req.body,//returned.body.scarlet,//returned.body.scarlet,
+                    user_input: req.data,
+                    SCARLET_output: req.data,//returned.body.scarlet,//returned.body.scarlet,
                     msg: '',
                     ermsg: returned.ermsg
                 }
