@@ -21,7 +21,7 @@ app.get(
             const fetched = fetcher.Doget()
             let returned = await fetched;
             res.json({
-                updated: 21062023_1015,
+                updated: 21062023_1018,
                 API: 'ONLINE',
                 SCARLET: returned.body.scarlet,
                 USER: 'This domain only accepts posts from netlify front end',
@@ -29,7 +29,7 @@ app.get(
             })
         } catch (err){
             res.json({
-                updated: 21062023_1015,
+                updated: 21062023_1018,
                 API: 'ONLINE',
                 SCARLET: 'CHECK FAILED',
                 USER: 'This domain only accepts posts from netlify front end',
@@ -52,7 +52,7 @@ app.post(
                 },
                 body: {
                     user_input: req.data,
-                    SCARLET_output: returned.body.scarlet,
+                    SCARLET_output: req.data,//returned.body.scarlet,
                     msg: '',
                     ermsg: fetched.ermsg
                 }
