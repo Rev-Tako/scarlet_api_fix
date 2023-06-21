@@ -24,7 +24,7 @@ app.get(
             const fetched = fetcher.Doget()
             let returned = await fetched;
             res.json({
-                updated: 21062023_1415,
+                updated: 21062023_1418,
                 API: 'ONLINE',
                 SCARLET: returned.body.scarlet,
                 USER: 'This domain only accepts posts from netlify front end',
@@ -32,7 +32,7 @@ app.get(
             })
         } catch (err){
             res.json({
-                updated: 21062023_1415,
+                updated: 21062023_1418,
                 API: 'ONLINE',
                 SCARLET: 'CHECK FAILED',
                 USER: 'This domain only accepts posts from netlify front end',
@@ -66,7 +66,7 @@ app.post(
                   'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
               },
               user_input: req.body,
-              SCARLET_output: [{recipient_id: "user", text: "no returned message from SCARLET, check server online and try again"}],
+              SCARLET_output: 'no message to return',
               msg: '',
               ermsg: err.message//'Error: disconnect between API and fetcher'
           })
