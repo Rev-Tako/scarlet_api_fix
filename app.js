@@ -44,15 +44,15 @@ app.post(
     cors(),
     async function (req,res){
       try {
-          const fetched = fetcher.Handler(req);
+          const fetched = fetcher.Handler(req.body.message);
           let returned = await fetched;
             res.json({
                 headers: {
                     'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
                 },
                 body: {
-                    user_input: req,
-                    SCARLET_output: req,//returned.body.scarlet,
+                    user_input: req.body.message,
+                    SCARLET_output: fetched,//returned.body.scarlet,
                     msg: '',
                     ermsg: fetched.ermsg
                 }
@@ -62,7 +62,7 @@ app.post(
               headers: {
                   'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
               },
-              user_input: req,
+              user_input: req.body.message,
               SCARLET_output: 'no return from SCARLET',
               msg: '',
               ermsg: err.message//'Error: disconnect between API and fetcher'
