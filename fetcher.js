@@ -49,7 +49,7 @@ module.exports = {
             return {
                 statusCode: 200,
                 body: {
-                    scarlet: 'Response failed',
+                    scarlet: err.message,//'Response failed',
                     ermsg: 'Error: disconnect between API and SCARLET'
                 },
             }
