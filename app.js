@@ -24,7 +24,7 @@ app.get(
             const fetched = fetcher.Doget()
             let returned = await fetched;
             res.json({
-                updated: 21062023_1249,
+                updated: 21062023_1252,
                 API: 'ONLINE',
                 SCARLET: returned.body.scarlet,
                 USER: 'This domain only accepts posts from netlify front end',
@@ -32,7 +32,7 @@ app.get(
             })
         } catch (err){
             res.json({
-                updated: 21062023_1249,
+                updated: 21062023_1252,
                 API: 'ONLINE',
                 SCARLET: 'CHECK FAILED',
                 USER: 'This domain only accepts posts from netlify front end',
@@ -47,16 +47,16 @@ app.post(
     cors(),
     async function (req,res){
       try {
-          const fetched = fetcher.Handler(req.body);
+          const fetched = fetcher.Handler(req.body.message);
           let returned = await fetched;
           res.json({
                 headers: {
                     'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
                 },
                 body: {
-                    user_input: req.body,
-                    SCARLET_output: req.body,//returned.body.scarlet,//returned.body.scarlet,
-                    msg: req.body,
+                    user_input: req.body.message,
+                    SCARLET_output: returned.body.scarlet,//returned.body.scarlet,//returned.body.scarlet,
+                    msg: '',
                     ermsg: returned.ermsg
                 }
             })
@@ -65,9 +65,9 @@ app.post(
               headers: {
                   'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
               },
-              user_input: req.body,
+              user_input: req.body.message,
               SCARLET_output: 'no return from SCARLET',
-              msg: req.body,
+              msg: '',
               ermsg: err.message//'Error: disconnect between API and fetcher'
           })
       }
