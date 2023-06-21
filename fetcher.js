@@ -27,13 +27,13 @@ module.exports = {
         }
     },
 
-    async Handler(request) {
+    async Handler(user_message) {
         try {
             let response = await axios.post(
                 "http://tehr10.cis.strath.ac.uk:5055/webhooks/rest/webhook",
                 {
                     sender: 'user',
-                    message: request,
+                    message: user_message,
                 },
                 );
             let to_return = await response;
