@@ -36,7 +36,7 @@ module.exports = {
                     message: request.data.message,
                 },
                 );
-            let to_return = await response.data;
+            let to_return = await response;
             return {
                 statusCode: 200,
                 body: {
