@@ -33,7 +33,7 @@ module.exports = {
                 "http://tehr10.cis.strath.ac.uk:5055/webhooks/rest/webhook",
                 {
                     "sender": "user",  // sender ID of the user sending the message
-                    "message": user_message,
+                    "message": user_message.body,
                 },
                 );
             let to_return = await response;
