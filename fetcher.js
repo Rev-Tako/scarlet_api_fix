@@ -32,7 +32,8 @@ module.exports = {
             let response = await axios.post(
                 "http://tehr10.cis.strath.ac.uk:5055/webhooks/rest/webhook",
                 {
-                   user_message,
+                    "sender": "user",  // sender ID of the user sending the message
+                    "message": user_message,
                 },
                 );
             let to_return = await response;
