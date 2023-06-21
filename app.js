@@ -52,7 +52,7 @@ app.post(
                 },
                 body: {
                     user_input: req.body.message,
-                    SCARLET_output: fetched,//returned.body.scarlet,
+                    SCARLET_output: fetched.scarlet,//returned.body.scarlet,
                     msg: '',
                     ermsg: fetched.ermsg
                 }
