@@ -5,6 +5,8 @@ const React = require('react')
 const axios = require("axios")
 const cors = require('cors')
 
+app.use(express.json())
+
 app.use(cors({
     origin: 'https://scarletwebdevtest.netlify.app',
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
@@ -12,7 +14,8 @@ app.use(cors({
     'access-control-allow-credentials': true,
     'access-control-allow-methods': 'GET, POST',
     'access-control-allow-origin': '*',
-}));
+}))
+
 app.get(
     '/',
     cors(),
@@ -21,7 +24,7 @@ app.get(
             const fetched = fetcher.Doget()
             let returned = await fetched;
             res.json({
-                updated: 21062023_1244,
+                updated: 21062023_1249,
                 API: 'ONLINE',
                 SCARLET: returned.body.scarlet,
                 USER: 'This domain only accepts posts from netlify front end',
@@ -29,7 +32,7 @@ app.get(
             })
         } catch (err){
             res.json({
-                updated: 21062023_1244,
+                updated: 21062023_1249,
                 API: 'ONLINE',
                 SCARLET: 'CHECK FAILED',
                 USER: 'This domain only accepts posts from netlify front end',
@@ -46,7 +49,7 @@ app.post(
       try {
           const fetched = fetcher.Handler(req.body);
           let returned = await fetched;
-            res.json({
+          res.json({
                 headers: {
                     'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
                 },
