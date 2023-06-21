@@ -53,7 +53,7 @@ app.post(
                 body: {
                     user_input: req.body,
                     SCARLET_output: req.body,//returned.body.scarlet,//returned.body.scarlet,
-                    msg: '',
+                    msg: req.body,
                     ermsg: returned.ermsg
                 }
             })
@@ -64,7 +64,7 @@ app.post(
               },
               user_input: req.body,
               SCARLET_output: 'no return from SCARLET',
-              msg: '',
+              msg: req.body,
               ermsg: err.message//'Error: disconnect between API and fetcher'
           })
       }
