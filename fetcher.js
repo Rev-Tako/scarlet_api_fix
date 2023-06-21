@@ -30,7 +30,7 @@ module.exports = {
     async Handler(request) {
         try {
             let response = await axios.post(
-                "http://tehr10.cis.strath.ac.uk:5055/",
+                "http://tehr10.cis.strath.ac.uk:5055/webhooks/rest/webhook",
                 {
                     sender: 'user',
                     message: request.data.message,
