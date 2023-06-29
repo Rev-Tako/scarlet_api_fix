@@ -30,7 +30,7 @@ app.get(
             const fetched = fetcher.Doget()
             let returned = await fetched;
             res.json({
-                updated: 29062023_1548,
+                updated: 29062023_1556,
                 API: 'ONLINE',
                 SCARLET: returned.body.scarlet,
                 USER: 'This domain only accepts posts from netlify front end',
@@ -38,7 +38,7 @@ app.get(
             })
         } catch (err){
             res.json({
-                updated: 29062023_1548,
+                updated: 29062023_1556,
                 API: 'ONLINE',
                 SCARLET: 'CHECK FAILED',
                 USER: 'This domain only accepts posts from netlify front end',
@@ -72,10 +72,12 @@ app.post(
               headers: {
                   'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
               },
-              user_input: req.body,
-              SCARLET_output: [{recipient_id: "user", text: 'no message to return: ' + err.message}],
-              msg: '',
-              ermsg: err.message//'Error: disconnect between API and fetcher'
+              body: {
+                  user_input: req.body,
+                  SCARLET_output: [{recipient_id: "user", text: 'no message to return: ' + err.message}],
+                  msg: '',
+                  ermsg: err.message//'Error: disconnect between API and fetcher'
+              },
           })
       }
 })
