@@ -55,7 +55,7 @@ app.post(
       try {
           const fetched = fetcher.Handler(req.body);
           let returned = await fetched;
-          appendToStorage('Conversation', req.body + ': ' + returned.body.scarlet + ',')
+          processForSaving(req.body, returned.body.scarlet)
           res.json({
                 headers: {
                     'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
@@ -125,6 +125,17 @@ function appendToStorage(name, data){
     var old = localStorage.getItem(name);
     if(old === null) old = "";
     localStorage.setItem(name, old + data);
+}
+
+function processForSaving(user_input, scarlet_outputs) {
+    let scarlet_array = []
+
+    for (const inner of scarlet_outputs)
+    {
+        scarlet_array = scarlet_array.push(inner.text);
+    }
+
+    appendToStorage('Conversation', user_input + ': ' + scarlet_array + ',')
 }
 
 /*
