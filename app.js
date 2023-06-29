@@ -93,7 +93,9 @@ app.get(
                     headers: {
                         'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
                     },
-                    data: err.message,
+                    body: {
+                        SCARLET_output: [{recipient_id: "user", text: err.message,}]
+                    }
                 });
             } else {
                 localStorage.clear()
@@ -101,7 +103,9 @@ app.get(
                     headers: {
                         'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
                     },
-                    data: 'Conversation saved',
+                    body: {
+                        SCARLET_output: [{recipient_id: "user", text: 'Conversation saved'}],
+                    }
                 });
             }
 
@@ -129,13 +133,13 @@ function appendToStorage(name, data){
 
 function processForSaving(user_input, scarlet_outputs) {
     let scarlet_array = []
-
+    let user_utterance = user_input.body
     for (const inner of scarlet_outputs)
     {
         scarlet_array.push(inner.text);
     }
 
-    appendToStorage('Conversation', user_input.body + ': ' + scarlet_array + ',')
+    appendToStorage('Conversation', user_utterance + ': ' + scarlet_array + ',')
 }
 
 /*
