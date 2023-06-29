@@ -87,7 +87,7 @@ app.get(
     function (req, res) {
         const content = localStorage.getItem('Conversation')
         const fileDate = Date.now()
-        fs.writeFile('conversation'+fileDate+'.txt', content, err => {
+        fs.writeFile('outputs/conversation'+fileDate+'.txt', content, err => {
             if (err) {
                 res.json({
                     headers: {
