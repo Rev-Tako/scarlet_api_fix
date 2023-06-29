@@ -116,9 +116,9 @@ app.listen(3000, function () {
 })
 
 function appendToStorage(name, data){
-    var old = localStorage.getItem(name);
+    var old = window.localStorage.getItem(name);
     if(old === null) old = "";
-    localStorage.setItem(name, old + data);
+    window.localStorage.setItem(name, old + data);
 }
 
 /*
