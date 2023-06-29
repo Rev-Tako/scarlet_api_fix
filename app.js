@@ -30,7 +30,7 @@ app.get(
             const fetched = fetcher.Doget()
             let returned = await fetched;
             res.json({
-                updated: 29062023_1546,
+                updated: 29062023_1548,
                 API: 'ONLINE',
                 SCARLET: returned.body.scarlet,
                 USER: 'This domain only accepts posts from netlify front end',
@@ -38,7 +38,7 @@ app.get(
             })
         } catch (err){
             res.json({
-                updated: 29062023_1546,
+                updated: 29062023_1548,
                 API: 'ONLINE',
                 SCARLET: 'CHECK FAILED',
                 USER: 'This domain only accepts posts from netlify front end',
@@ -120,9 +120,9 @@ app.listen(3000, function () {
 })
 
 function appendToStorage(name, data){
-    var old = window.localStorage.getItem(name);
+    var old = localStorage.getItem(name);
     if(old === null) old = "";
-    window.localStorage.setItem(name, old + data);
+    localStorage.setItem(name, old + data);
 }
 
 /*
