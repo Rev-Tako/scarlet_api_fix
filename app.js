@@ -88,7 +88,7 @@ app.get(
         const content = localStorage.getItem('Conversation')
         const fileDate = Date.now()
     try {
-        const writeStream = fs.createWriteStream('outputs/conversation' + fileDate + '.txt');
+        var writeStream = fs.createWriteStream('outputs/conversation' + fileDate + '.txt');
         writeStream.write(content)
         writeStream.end();
         localStorage.clear()
