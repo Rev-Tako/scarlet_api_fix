@@ -132,7 +132,7 @@ function processForSaving(user_input, scarlet_outputs) {
 
     for (const inner of scarlet_outputs)
     {
-        scarlet_array = scarlet_array.push(inner.text);
+        scarlet_array.push(inner.text);
     }
 
     appendToStorage('Conversation', user_input + ': ' + scarlet_array + ',')
