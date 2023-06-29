@@ -87,29 +87,29 @@ app.get(
     function (req, res) {
         const content = localStorage.getItem('Conversation')
         const fileDate = Date.now()
-        fs.writeFile('outputs/conversation'+fileDate+'.txt', content, err => {
-            if (err) {
-                res.json({
-                    headers: {
-                        'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
-                    },
-                    body: {
-                        SCARLET_output: [{recipient_id: "user", text: err.message,}]
-                    }
-                });
-            } else {
-                localStorage.clear()
-                res.json({
-                    headers: {
-                        'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
-                    },
-                    body: {
-                        SCARLET_output: [{recipient_id: "user", text: 'Conversation saved'}],
-                    }
-                });
+    try {
+        const writeStream = fs.createWriteStream('outputs/conversation' + fileDate + '.txt');
+        writeStream.write(content)
+        writeStream.end();
+        localStorage.clear()
+        res.json({
+            headers: {
+                'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
+            },
+            body: {
+                SCARLET_output: [{recipient_id: "user", text: 'Conversation saved'}],
             }
-
         });
+    } catch (err) {
+        res.json({
+            headers: {
+                'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
+            },
+            body: {
+                SCARLET_output: [{recipient_id: "user", text: err.message,}]
+            }
+        });
+        }
     }
 )
 app.post(
