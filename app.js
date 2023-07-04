@@ -159,7 +159,7 @@ function processForSaving(user_input, scarlet_outputs, user_id, reinit) {
     localStorage.setItem(user_id+'_iterant', iterant)
     }
 
-    appendToStorage('Conversation_' + user_id + '_' + iterant, user_utterance + ': ' + scarlet_array + ',')
+    appendToStorage(user_id + '_' + 'Conversation_' + iterant, user_utterance + ': ' + scarlet_array + ',')
 }
 
 /*
