@@ -146,11 +146,16 @@ function processForSaving(user_input, scarlet_outputs, user_id, reinit) {
     {
         scarlet_array.push(inner.text);
     }
-
-    var iterant = localStorage.getItem(user_id+'_iterant')
-    if(iterant === null) iterant = 0;
-    if (reinit) {
-    localStorage.setItem(user_id+'_iterant', iterant + 1)
+    var iterant = 0
+    var checkIterant = localStorage.getItem(user_id+'_iterant')
+    if(checkIterant === null) {
+        localStorage.setItem(user_id+'_iterant', iterant)
+    } else {
+        iterant = checkIterant;
+    }
+    if (reinit === true) {
+        iterant = iterant + 1
+    localStorage.setItem(user_id+'_iterant', iterant)
     }
 
     appendToStorage('Conversation_' + user_id + '_' + iterant, user_utterance + ': ' + scarlet_array + ',')
