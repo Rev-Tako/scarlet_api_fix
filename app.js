@@ -30,7 +30,7 @@ app.get(
             const fetched = fetcher.Doget()
             let returned = await fetched;
             res.json({
-                updated: 4072023_1332,
+                updated: 4072023_1400,
                 API: 'ONLINE',
                 SCARLET: returned.body.scarlet,
                 USER: 'This domain only accepts posts from netlify front end',
@@ -38,7 +38,7 @@ app.get(
             })
         } catch (err){
             res.json({
-                updated: 4072023_1332,
+                updated: 4072023_1400,
                 API: 'ONLINE',
                 SCARLET: 'CHECK FAILED',
                 USER: 'This domain only accepts posts from netlify front end',
@@ -152,7 +152,7 @@ function processForSaving(user_input, scarlet_outputs, user_id, reinit) {
     if(checkIterant === null) {
         localStorage.setItem(user_id+'_iterant', iterant)
     } else {
-        iterant = checkIterant;
+        iterant = parseInt(checkIterant);
     }
     if (reinit === true) {
         iterant = iterant + 1
