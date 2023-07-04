@@ -30,7 +30,7 @@ app.get(
             const fetched = fetcher.Doget()
             let returned = await fetched;
             res.json({
-                updated: 4072023_1236,
+                updated: 4072023_1254,
                 API: 'ONLINE',
                 SCARLET: returned.body.scarlet,
                 USER: 'This domain only accepts posts from netlify front end',
@@ -38,7 +38,7 @@ app.get(
             })
         } catch (err){
             res.json({
-                updated: 4072023_1236,
+                updated: 4072023_1254,
                 API: 'ONLINE',
                 SCARLET: 'CHECK FAILED',
                 USER: 'This domain only accepts posts from netlify front end',
@@ -54,6 +54,7 @@ app.post(
     async function (req,res){
       try {
           const fetched = fetcher.Handler(req.body, req.user_id);
+          localStorage.setItem('user_id_current', req.user_id + 'and' + req.reinit)
           let returned = await fetched;
           processForSaving(req.body, returned.body.scarlet, req.user_id, req.reinit)
           res.json({
