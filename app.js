@@ -53,7 +53,7 @@ app.post(
     cors(),
     async function (req,res){
       try {
-          const fetched = fetcher.Handler(req.body, req.user_id);
+          const fetched = fetcher.Handler(req.body, req.body.user_id);
           localStorage.setItem('user_id_current', req.body.user_id + ' and ' + req.body.reinit)
           let returned = await fetched;
           processForSaving(req.body, returned.body.scarlet, req.body.user_id, req.body.reinit)
