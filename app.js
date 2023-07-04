@@ -30,7 +30,7 @@ app.get(
             const fetched = fetcher.Doget()
             let returned = await fetched;
             res.json({
-                updated: 4072023_1114,
+                updated: 4072023_1236,
                 API: 'ONLINE',
                 SCARLET: returned.body.scarlet,
                 USER: 'This domain only accepts posts from netlify front end',
@@ -38,7 +38,7 @@ app.get(
             })
         } catch (err){
             res.json({
-                updated: 4072023_1114,
+                updated: 4072023_1236,
                 API: 'ONLINE',
                 SCARLET: 'CHECK FAILED',
                 USER: 'This domain only accepts posts from netlify front end',
@@ -55,7 +55,7 @@ app.post(
       try {
           const fetched = fetcher.Handler(req.body, req.user_id);
           let returned = await fetched;
-          processForSaving(req.body, returned.body.scarlet, req.user_id)
+          processForSaving(req.body, returned.body.scarlet, req.user_id, req.reinit)
           res.json({
                 headers: {
                     'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
@@ -112,13 +112,13 @@ app.post(
 //         }
 //     }
 // )
-app.post(
-    '/rating',
-    cors(),
-    function (req, res) {
-
-    }
-)
+// app.post(
+//     '/rating',
+//     cors(),
+//     function (req, res) {
+//
+//     }
+// )
 
 // app.get(
 //     '/uplink',
@@ -139,7 +139,7 @@ function appendToStorage(name, data){
     localStorage.setItem(name, old + data);
 }
 
-function processForSaving(user_input, scarlet_outputs, user_id) {
+function processForSaving(user_input, scarlet_outputs, user_id, reinit) {
     let scarlet_array = []
     let user_utterance = user_input.body
     for (const inner of scarlet_outputs)
@@ -147,7 +147,13 @@ function processForSaving(user_input, scarlet_outputs, user_id) {
         scarlet_array.push(inner.text);
     }
 
-    appendToStorage('Conversation_' + user_id, user_utterance + ': ' + scarlet_array + ',')
+    var iterant = localStorage.getItem(user_id+'_iterant')
+    if(iterant === null) iterant = 0;
+    if (reinit) {
+    localStorage.setItem(user_id+'_iterant', iterant + 1)
+    }
+
+    appendToStorage('Conversation_' + user_id + '_' + iterant, user_utterance + ': ' + scarlet_array + ',')
 }
 
 /*
