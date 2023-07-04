@@ -30,7 +30,7 @@ app.get(
             const fetched = fetcher.Doget()
             let returned = await fetched;
             res.json({
-                updated: 4072023_1257,
+                updated: 4072023_1300,
                 API: 'ONLINE',
                 SCARLET: returned.body.scarlet,
                 USER: 'This domain only accepts posts from netlify front end',
@@ -38,7 +38,7 @@ app.get(
             })
         } catch (err){
             res.json({
-                updated: 4072023_1257,
+                updated: 4072023_1300,
                 API: 'ONLINE',
                 SCARLET: 'CHECK FAILED',
                 USER: 'This domain only accepts posts from netlify front end',
@@ -56,7 +56,7 @@ app.post(
           const fetched = fetcher.Handler(req.body, req.user_id);
           localStorage.setItem('user_id_current', req.body.user_id + ' and ' + req.body.reinit)
           let returned = await fetched;
-          processForSaving(req.body, returned.body.scarlet, req.user_id, req.reinit)
+          processForSaving(req.body, returned.body.scarlet, req.body.user_id, req.body.reinit)
           res.json({
                 headers: {
                     'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
