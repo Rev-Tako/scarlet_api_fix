@@ -54,7 +54,7 @@ app.post(
     async function (req,res){
       try {
           const fetched = fetcher.Handler(req.body, req.user_id);
-          localStorage.setItem('user_id_current', req.user_id + 'and' + req.reinit)
+          localStorage.setItem('user_id_current', req.body.user_id + ' and ' + req.body.reinit)
           let returned = await fetched;
           processForSaving(req.body, returned.body.scarlet, req.user_id, req.reinit)
           res.json({
