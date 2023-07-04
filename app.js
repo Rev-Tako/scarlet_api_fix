@@ -53,9 +53,9 @@ app.post(
     cors(),
     async function (req,res){
       try {
-          const fetched = fetcher.Handler(req.body);
+          const fetched = fetcher.Handler(req.body, req.user_id);
           let returned = await fetched;
-          processForSaving(req.body, returned.body.scarlet)
+          processForSaving(req.body, returned.body.scarlet, req.user_id)
           res.json({
                 headers: {
                     'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
@@ -74,44 +74,44 @@ app.post(
               },
               body: {
                   user_input: req.body,
-                  SCARLET_output: [{recipient_id: "user", text: 'no message to return: ' + err.message}],
+                  SCARLET_output: [{recipient_id: req.user_id, text: 'no message to return: ' + err.message}],
                   msg: '',
                   ermsg: err.message//'Error: disconnect between API and fetcher'
               },
           })
       }
 })
-app.get(
-    '/save',
-    cors(),
-    function (req, res) {
-        const content = localStorage.getItem('Conversation')
-        const fileDate = Date.now()
-    try {
-        var writeStream = fs.createWriteStream('outputs/conversation' + fileDate + '.txt');
-        writeStream.write(content)
-        writeStream.end();
-        localStorage.clear()
-        res.json({
-            headers: {
-                'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
-            },
-            body: {
-                SCARLET_output: [{recipient_id: "user", text: 'Conversation saved'}],
-            }
-        });
-    } catch (err) {
-        res.json({
-            headers: {
-                'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
-            },
-            body: {
-                SCARLET_output: [{recipient_id: "user", text: err.message,}]
-            }
-        });
-        }
-    }
-)
+// app.get(
+//     '/save',
+//     cors(),
+//     function (req, res) {
+//         const content = localStorage.getItem('Conversation')
+//         const fileDate = Date.now()
+//     try {
+//         var writeStream = fs.createWriteStream('outputs/conversation' + fileDate + '.txt');
+//         writeStream.write(content)
+//         writeStream.end();
+//         localStorage.clear()
+//         res.json({
+//             headers: {
+//                 'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
+//             },
+//             body: {
+//                 SCARLET_output: [{recipient_id: "user", text: 'Conversation saved'}],
+//             }
+//         });
+//     } catch (err) {
+//         res.json({
+//             headers: {
+//                 'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
+//             },
+//             body: {
+//                 SCARLET_output: [{recipient_id: "user", text: err.message,}]
+//             }
+//         });
+//         }
+//     }
+// )
 app.post(
     '/rating',
     cors(),
@@ -119,6 +119,14 @@ app.post(
 
     }
 )
+
+// app.get(
+//     '/uplink',
+//     cors(),
+//     function (req, res) {
+//          = Date.now()
+//     }
+// )
 
 
 app.listen(3000, function () {
@@ -131,7 +139,7 @@ function appendToStorage(name, data){
     localStorage.setItem(name, old + data);
 }
 
-function processForSaving(user_input, scarlet_outputs) {
+function processForSaving(user_input, scarlet_outputs, user_id) {
     let scarlet_array = []
     let user_utterance = user_input.body
     for (const inner of scarlet_outputs)
@@ -139,7 +147,7 @@ function processForSaving(user_input, scarlet_outputs) {
         scarlet_array.push(inner.text);
     }
 
-    appendToStorage('Conversation', user_utterance + ': ' + scarlet_array + ',')
+    appendToStorage('Conversation_' + user_id, user_utterance + ': ' + scarlet_array + ',')
 }
 
 /*

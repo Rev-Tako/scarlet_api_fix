@@ -27,12 +27,12 @@ module.exports = {
         }
     },
 
-    async Handler(user_message) {
+    async Handler(user_message, user_id) {
         try {
             let response = await axios.post(
                 "http://tehr10.cis.strath.ac.uk:5055/webhooks/rest/webhook",
                 {
-                    "sender": "user",  // sender ID of the user sending the message
+                    "sender": user_id,  // sender ID of the user sending the message
                     "message": user_message.body,
                 },
                 );
@@ -49,7 +49,7 @@ module.exports = {
             return {
                 statusCode: 200,
                 body: {
-                    scarlet: [{recipient_id: "user", text: "no returned message from SCARLET, check server online and try again"}],//err.message,//'Response failed',
+                    scarlet: [{recipient_id: user_id, text: "no returned message from SCARLET, check server online and try again"}],//err.message,//'Response failed',
                     ermsg: 'Error: disconnect between API and SCARLET'
                 },
             }
