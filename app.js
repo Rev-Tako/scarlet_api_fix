@@ -30,7 +30,7 @@ app.get(
             const fetched = fetcher.Doget()
             let returned = await fetched;
             res.json({
-                updated: 4072023_1443,
+                updated: 11072023_1048,
                 API: 'ONLINE',
                 SCARLET: returned.body.scarlet,
                 USER: 'This domain only accepts posts from netlify front end',
@@ -38,7 +38,7 @@ app.get(
             })
         } catch (err){
             res.json({
-                updated: 4072023_1443,
+                updated: 11072023_1048,
                 API: 'ONLINE',
                 SCARLET: 'CHECK FAILED',
                 USER: 'This domain only accepts posts from netlify front end',
@@ -52,9 +52,24 @@ app.post(
     '/',
     cors(),
     async function (req,res){
-      try {
+        localStorage.setItem('user_id_current', req.body.user_id + ' and ' + req.body.reinit)
+        if (req.body.body === 'TP' || req.body.body === 'FP' || req.body.body === 'FN') {
+            addFeedback(req.body, req.body.user_id)
+            res.json({
+                headers: {
+                    'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
+                },
+                body: {
+                    user_input: req.body,
+                    SCARLET_output: [{recipient_id: req.user_id, text: 'feedback saved'}],//returned.body.scarlet,//returned.body.scarlet,
+                    msg: '',
+                    ermsg: ''
+                }
+            })
+
+        } else {
+        try {
           const fetched = fetcher.Handler(req.body, req.body.user_id);
-          localStorage.setItem('user_id_current', req.body.user_id + ' and ' + req.body.reinit)
           let returned = await fetched;
           processForSaving(req.body, returned.body.scarlet, req.body.user_id, req.body.reinit)
           res.json({
@@ -81,6 +96,7 @@ app.post(
               },
           })
       }
+        }
 })
 // app.get(
 //     '/save',
@@ -140,13 +156,7 @@ function appendToStorage(name, data){
     localStorage.setItem(name, old + data);
 }
 
-function processForSaving(user_input, scarlet_outputs, user_id, reinit) {
-    let scarlet_array = []
-    let user_utterance = user_input.body
-    for (const inner of scarlet_outputs)
-    {
-        scarlet_array.push(inner.text);
-    }
+function checkIterant(user_id, reinit){
     var iterant = 0
     var checkIterant = localStorage.getItem(user_id+'_iterant')
     if(checkIterant === null) {
@@ -156,10 +166,29 @@ function processForSaving(user_input, scarlet_outputs, user_id, reinit) {
     }
     if (reinit === true) {
         iterant = iterant + 1
-    localStorage.setItem(user_id+'_iterant', iterant)
+        localStorage.setItem(user_id+'_iterant', iterant)
     }
+    return iterant
+}
+
+
+function processForSaving(user_input, scarlet_outputs, user_id, reinit) {
+    let scarlet_array = []
+    let user_utterance = user_input.body
+    for (const inner of scarlet_outputs)
+    {
+        scarlet_array.push(inner.text);
+    }
+    var iterant = checkIterant(user_id, reinit)
 
     appendToStorage(user_id + '_' + 'Conversation_' + iterant, user_utterance + ': ' + scarlet_array + ',')
+}
+
+function addFeedback(user_input, user_id) {
+    let user_utterance = user_input.body
+    var iterant = checkIterant(user_id, false)
+
+    appendToStorage(user_id + '_' + 'Conversation_' + iterant, 'FEEDBACK: ' + user_utterance)
 }
 
 /*
