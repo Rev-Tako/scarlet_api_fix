@@ -30,7 +30,7 @@ app.get(
             const fetched = fetcher.Doget()
             let returned = await fetched;
             res.json({
-                updated: 11072023_1048,
+                updated: 11072023_1053,
                 API: 'ONLINE',
                 SCARLET: returned.body.scarlet,
                 USER: 'This domain only accepts posts from netlify front end',
@@ -38,7 +38,7 @@ app.get(
             })
         } catch (err){
             res.json({
-                updated: 11072023_1048,
+                updated: 11072023_1053,
                 API: 'ONLINE',
                 SCARLET: 'CHECK FAILED',
                 USER: 'This domain only accepts posts from netlify front end',
@@ -181,14 +181,14 @@ function processForSaving(user_input, scarlet_outputs, user_id, reinit) {
     }
     var iterant = checkIterant(user_id, reinit)
 
-    appendToStorage(user_id + '_' + 'Conversation_' + iterant, user_utterance + ': ' + scarlet_array + ',')
+    appendToStorage(user_id + '_' + 'Conversation_' + iterant, user_utterance + ': ' + scarlet_array + ', ')
 }
 
 function addFeedback(user_input, user_id) {
     let user_utterance = user_input.body
     var iterant = checkIterant(user_id, false)
 
-    appendToStorage(user_id + '_' + 'Conversation_' + iterant, 'FEEDBACK: ' + user_utterance)
+    appendToStorage(user_id + '_' + 'Conversation_' + iterant, 'FEEDBACK: ' + user_utterance + ' ')
 }
 
 /*
