@@ -66,7 +66,7 @@ app.post(
                     ermsg: ''
                 }
             })
-        } else if ('rating' in req.body.body.lower) {
+        } else if ('rating:' in req.body.body.lower) {
             addFeedback(req.body, req.body.user_id)
             res.json({
                 headers: {
