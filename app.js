@@ -30,7 +30,7 @@ app.get(
             const fetched = fetcher.Doget()
             let returned = await fetched;
             res.json({
-                updated: 2082023_1011,
+                updated: 2082023_1039,
                 API: 'ONLINE',
                 SCARLET: returned.body.scarlet,
                 USER: 'This domain only accepts posts from netlify front end',
@@ -38,7 +38,7 @@ app.get(
             })
         } catch (err){
             res.json({
-                updated: 2082023_1011,
+                updated: 2082023_1039,
                 API: 'ONLINE',
                 SCARLET: 'CHECK FAILED',
                 USER: 'This domain only accepts posts from netlify front end',
@@ -66,7 +66,7 @@ app.post(
                     ermsg: ''
                 }
             })
-        } else if ('rating:' in req.body.body.lower) {
+        } else if (req.body.body.toLowerCase().includes('rating:')) {
             addFeedback(req.body, req.body.user_id)
             res.json({
                 headers: {
