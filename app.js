@@ -66,7 +66,19 @@ app.post(
                     ermsg: ''
                 }
             })
-
+        } else if ('rating' in req.body.body.lower) {
+            addFeedback(req.body, req.body.user_id)
+            res.json({
+                headers: {
+                    'Access-Control-Allow-Origin': 'https://scarletwebdevtest.netlify.app',
+                },
+                body: {
+                    user_input: req.body,
+                    SCARLET_output: [{recipient_id: req.user_id, text: 'feedback saved'}],//returned.body.scarlet,//returned.body.scarlet,
+                    msg: '',
+                    ermsg: ''
+                }
+            })
         } else {
         try {
           const fetched = fetcher.Handler(req.body, req.body.user_id);
