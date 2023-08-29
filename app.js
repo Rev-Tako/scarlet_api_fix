@@ -61,7 +61,7 @@ app.post(
                 },
                 body: {
                     user_input: req.body,
-                    SCARLET_output: [{recipient_id: req.user_id, text: 'feedback saved'}],//returned.body.scarlet,//returned.body.scarlet,
+                    SCARLET_output: [{recipient_id: req.user_id, text: 'Feedback saved'}],//returned.body.scarlet,//returned.body.scarlet,
                     msg: '',
                     ermsg: ''
                 }
@@ -74,13 +74,15 @@ app.post(
                 },
                 body: {
                     user_input: req.body,
-                    SCARLET_output: [{recipient_id: req.user_id, text: 'feedback saved'}],//returned.body.scarlet,//returned.body.scarlet,
+                    SCARLET_output: [{recipient_id: req.user_id, text: 'Rating saved'}],//returned.body.scarlet,//returned.body.scarlet,
                     msg: '',
                     ermsg: ''
                 }
             })
         } else {
         try {
+            if (req.body.body.toLowerCase().includes('/restart') || req.body.body.toLowerCase().includes('/retasrt') || req.body.body.toLowerCase().includes('/retsart') || req.body.body.toLowerCase().includes('/retart') || req.body.body.toLowerCase().includes('restart'))
+                {req.body.body = '/restart'} // talk about a patch, this feels hacky
           const fetched = fetcher.Handler(req.body, req.body.user_id);
           let returned = await fetched;
           processForSaving(req.body, returned.body.scarlet, req.body.user_id, req.body.reinit)
@@ -90,7 +92,7 @@ app.post(
                 },
                 body: {
                     user_input: req.body,
-                    SCARLET_output: returned.body.scarlet,//returned.body.scarlet,//returned.body.scarlet,
+                    SCARLET_output: returned.body.scarlet,
                     msg: '',
                     ermsg: returned.ermsg
                 }
@@ -102,7 +104,7 @@ app.post(
               },
               body: {
                   user_input: req.body,
-                  SCARLET_output: [{recipient_id: req.user_id, text: 'no message to return: ' + err.message}],
+                  SCARLET_output: [{recipient_id: req.user_id, text: 'An error occurred accessing SCARLET, this normally means the server has crashed. Please refer to the following error message and contact Graye or Dimitar: ' + err.message}],
                   msg: '',
                   ermsg: err.message//'Error: disconnect between API and fetcher'
               },
@@ -193,14 +195,14 @@ function processForSaving(user_input, scarlet_outputs, user_id, reinit) {
     }
     var iterant = checkIterant(user_id, reinit)
 
-    appendToStorage(user_id + '_' + 'Conversation_' + iterant, user_utterance + ': ' + scarlet_array + ', ')
+    appendToStorage(user_id + '_' + 'Conversation_' + iterant, '$' + user_utterance + ': ' + scarlet_array + '$')
 }
 
 function addFeedback(user_input, user_id) {
     let user_utterance = user_input.body
     var iterant = checkIterant(user_id, false)
 
-    appendToStorage(user_id + '_' + 'Conversation_' + iterant, 'FEEDBACK: ' + user_utterance + ' ')
+    appendToStorage(user_id + '_' + 'Conversation_' + iterant, '$ FEEDBACK: ' + user_utterance + ' $')
 }
 
 /*
