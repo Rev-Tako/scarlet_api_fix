@@ -33,7 +33,7 @@ app.get(
             let returned = await fetched;
             loop = true
             res.json({
-                updated: 29082023_1327,
+                updated: 14092023_1406,
                 API: 'ONLINE',
                 SCARLET: returned.body.scarlet,
                 USER: 'This domain only accepts posts from netlify front end',
@@ -42,7 +42,7 @@ app.get(
         } catch (err){
             loop = false
             res.json({
-                updated: 29082023_1327,
+                updated: 14092023_1406,
                 API: 'ONLINE',
                 SCARLET: 'CHECK FAILED',
                 USER: 'This domain only accepts posts from netlify front end',
@@ -218,7 +218,7 @@ function addFeedback(user_input, user_id) {
 }
 
 async function sendPing() {
-    setTimeout(subHandle, 5000)
+    setTimeout(subHandle, 86400000)
 }
 async function subHandle() {
     const message = {body: 'ping',
