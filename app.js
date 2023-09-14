@@ -27,13 +27,14 @@ app.get(
     cors(),
     async function (req, res) {
         var loop = true
+        var stamp = Date.now()
         while (loop) {
         try {
             const fetched = fetcher.Doget()
             let returned = await fetched;
             loop = true
             res.json({
-                updated: 14092023_1406,
+                updated: 14092023_1415,
                 API: 'ONLINE',
                 SCARLET: returned.body.scarlet,
                 USER: 'This domain only accepts posts from netlify front end',
@@ -42,19 +43,22 @@ app.get(
         } catch (err){
             loop = false
             res.json({
-                updated: 14092023_1406,
+                updated: 14092023_1415,
                 API: 'ONLINE',
                 SCARLET: 'CHECK FAILED',
                 USER: 'This domain only accepts posts from netlify front end',
                 ERRORS: err.message,
             })
         }
-        try {
-            await sendPing()
-        }
-        catch(e){
-            console.log(e.message)
-            loop = false
+        if (Date.now() - stamp >= 86400000){
+            try {
+                await sendPing()
+                stamp = Date.now()
+            }
+            catch(e){
+                console.log(e.message)
+                loop = false
+            }
         }
     }
     }
