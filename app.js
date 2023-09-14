@@ -26,41 +26,25 @@ app.get(
     '/',
     cors(),
     async function (req, res) {
-        var loop = true
-        var stamp = Date.now()
-        while (loop) {
         try {
             const fetched = fetcher.Doget()
             let returned = await fetched;
-            loop = true
             res.json({
-                updated: 14092023_1415,
+                updated: 14092023_1430,
                 API: 'ONLINE',
                 SCARLET: returned.body.scarlet,
                 USER: 'This domain only accepts posts from netlify front end',
                 ERRORS: returned.body.ermsg,
             })
         } catch (err){
-            loop = false
             res.json({
-                updated: 14092023_1415,
+                updated: 14092023_1430,
                 API: 'ONLINE',
                 SCARLET: 'CHECK FAILED',
                 USER: 'This domain only accepts posts from netlify front end',
                 ERRORS: err.message,
             })
         }
-        if (Date.now() - stamp >= 86400000){
-            try {
-                await sendPing()
-                stamp = Date.now()
-            }
-            catch(e){
-                console.log(e.message)
-                loop = false
-            }
-        }
-    }
     }
     )
 
@@ -79,7 +63,7 @@ app.post(
                     user_input: req.body,
                     SCARLET_output: [{recipient_id: req.user_id, text: 'Feedback saved'}],//returned.body.scarlet,//returned.body.scarlet,
                     msg: '',
-                    ermsg: ''
+                    ermsg: '',
                 }
             })
         } else if (req.body.body.toLowerCase().includes('rating:')) {
@@ -92,7 +76,7 @@ app.post(
                     user_input: req.body,
                     SCARLET_output: [{recipient_id: req.user_id, text: 'Rating saved'}],//returned.body.scarlet,//returned.body.scarlet,
                     msg: '',
-                    ermsg: ''
+                    ermsg: '',
                 }
             })
         } else {
@@ -178,6 +162,18 @@ app.post(
 
 app.listen(3000, function () {
   console.log('SCARLET API listening on port 3000')
+    var loop = true
+    var stamp = Date.now()
+    while (loop) {
+        if (Date.now() - stamp >= 86400000) {
+            try {
+                sendPing()
+                stamp = Date.now()
+            } catch (e) {
+                console.log(e.message)
+            }
+        }
+    }
 })
 
 function appendToStorage(name, data){
