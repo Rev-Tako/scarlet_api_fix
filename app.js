@@ -26,9 +26,12 @@ app.get(
     '/',
     cors(),
     async function (req, res) {
+        var loop = true
+        while (loop) {
         try {
             const fetched = fetcher.Doget()
             let returned = await fetched;
+            loop = true
             res.json({
                 updated: 29082023_1327,
                 API: 'ONLINE',
@@ -37,6 +40,7 @@ app.get(
                 ERRORS: returned.body.ermsg,
             })
         } catch (err){
+            loop = false
             res.json({
                 updated: 29082023_1327,
                 API: 'ONLINE',
@@ -45,6 +49,14 @@ app.get(
                 ERRORS: err.message,
             })
         }
+        try {
+            await sendPing()
+        }
+        catch(e){
+            console.log(e.message)
+            loop = false
+        }
+    }
     }
     )
 
@@ -53,7 +65,7 @@ app.post(
     cors(),
     async function (req,res){
         localStorage.setItem('user_id_current', req.body.user_id + ' and ' + req.body.reinit)
-        if (req.body.body === 'TP' || req.body.body === 'FP' || req.body.body === 'FN') {
+        if (req.body.body.toLowerCase() === 'tp' || req.body.body === 'fp' || req.body.body === 'fn') {
             addFeedback(req.body, req.body.user_id)
             res.json({
                 headers: {
@@ -205,6 +217,14 @@ function addFeedback(user_input, user_id) {
     appendToStorage(user_id + '_' + 'Conversation_' + iterant, '$ FEEDBACK: ' + user_utterance + ' $')
 }
 
+async function sendPing() {
+    setTimeout(subHandle, 5000)
+}
+async function subHandle() {
+    const message = {body: 'ping',
+                                                user_id: 101}
+    const fetched = await fetcher.Handler(message.body, message.user_id)
+}
 /*
 
 
