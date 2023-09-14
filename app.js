@@ -26,6 +26,9 @@ app.get(
     '/',
     cors(),
     async function (req, res) {
+        var loop = true
+        var stamp = Date.now()
+        while (loop) {
         try {
             const fetched = fetcher.Doget()
             let returned = await fetched;
@@ -44,6 +47,15 @@ app.get(
                 USER: 'This domain only accepts posts from netlify front end',
                 ERRORS: err.message,
             })
+        }
+            if (Date.now() - stamp >= 86400000) {
+                try {
+                    await sendPing()
+                    stamp = Date.now()
+                } catch (e) {
+                    console.log(e.message)
+                }
+            }
         }
     }
     )
@@ -162,18 +174,6 @@ app.post(
 
 app.listen(3000, function () {
   console.log('SCARLET API listening on port 3000')
-    var loop = true
-    var stamp = Date.now()
-    while (loop) {
-        if (Date.now() - stamp >= 86400000) {
-            try {
-                sendPing()
-                stamp = Date.now()
-            } catch (e) {
-                console.log(e.message)
-            }
-        }
-    }
 })
 
 function appendToStorage(name, data){
