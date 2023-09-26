@@ -37,6 +37,8 @@ module.exports = {
                 },
                 );
             let to_return = await response;
+            if (await to_return.data === null || await to_return.data === '')
+                to_return.data = 'SCARLET failed to produce a response, this is likely due to an intent classification error, if you have requested lesson metadata the slot may simply be empty, you should not need to restart the bot'
             return {
                 statusCode: 200,
                 body: {
