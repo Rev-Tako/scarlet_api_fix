@@ -28,7 +28,7 @@ app.get(
     async function (req, res) {
         var loop = true
         var stamp = Date.now()
-        while (loop) {
+        // while (loop) {
         try {
             const fetched = fetcher.Doget()
             let returned = await fetched;
@@ -48,15 +48,15 @@ app.get(
                 ERRORS: err.message,
             })
         }
-            if (Date.now() - stamp >= 86400000) {
-                try {
-                    await sendPing()
-                    stamp = Date.now()
-                } catch (e) {
-                    console.log(e.message)
-                }
-            }
-        }
+        //     if (Date.now() - stamp >= 86400000) {
+        //         try {
+        //             await sendPing()
+        //             stamp = Date.now()
+        //         } catch (e) {
+        //             console.log(e.message)
+        //         }
+        //     }
+        // }
     }
     )
 
